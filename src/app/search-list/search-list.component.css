@@ -1,0 +1,22 @@
+
+.imageflex {
+
+    text-align:center;
+
+}
+
+
+.parimage {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
+@media (max-width: 768px) {
+  .imageflex {
+      width:100%!important;
+
+  }
+
+}

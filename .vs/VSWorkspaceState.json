@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.firebase",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\covid-console",
+    "\\src\\app\\trend"
+  ],
+  "SelectedNode": "\\src\\app\\covid-console\\covid-console.component.html",
+  "PreviewInSolutionExplorer": false
+}
