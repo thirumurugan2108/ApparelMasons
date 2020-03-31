@@ -11,8 +11,6 @@ import * as firebase from 'firebase';
 
 interface CategoryList {
   CATEGORYLIST: string[];
-  // SCRUMLIST : String[] ;
-
 }
 
 @Component({
