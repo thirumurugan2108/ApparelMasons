@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 
 interface CategoryList {
   CATEGORYLIST: string[];
+  //rest
 }
 
 @Component({
