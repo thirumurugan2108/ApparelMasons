@@ -45,7 +45,10 @@ export class CovidConsoleComponent {
     'HimachalPradesh',
     'Puducherry',
     'Chhattisgarh',
-    'Bihar'
+    'Bihar',
+    'Sikkim',
+    'Assam',
+    'Jharkhand'
   ];
     
   constructor(private afs: AngularFirestore,
