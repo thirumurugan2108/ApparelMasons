@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'managePosts' ,
     component : ManagePostsComponent ,
-    canActivate : [authGaurd]
+    // canActivate : [authGaurd]
   }
 ];
 

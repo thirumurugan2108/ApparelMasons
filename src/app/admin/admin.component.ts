@@ -47,6 +47,7 @@ export class AdminComponent implements OnInit {
   editMode = false;
   // postForm: FormGroup;
   contactForm: FormGroup;
+  relatepostForm: FormGroup;
   post: Post = new Post();
   isImageLoaded = false;
 
@@ -57,6 +58,51 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder) {
     this.contactForm = this.createFormGroup(formBuilder);
+    this.relatepostForm = this.createrelativeForm(formBuilder);
+  }
+
+  createrelativeForm(formBuilder: FormBuilder): FormGroup {
+    return formBuilder.group({
+      RelativePost1: new FormControl(),
+      RelativePost2: new FormControl(),
+      RelativePost3: new FormControl()
+    });
+  }
+
+  saveRelativePost() {
+    console.log("oaisc");
+    console.log(this.relatepostForm.controls.RelativePost1.value);
+    console.log(this.relatepostForm.controls.RelativePost2.value);
+    if (this.relatepostForm.controls.RelativePost1.value) {
+      this.afs.
+        collection<Post>('posts', ref =>
+          ref.where('TITLE', '==', this.relatepostForm.controls.RelativePost1.value).limit(1))
+        .valueChanges({ idField: 'id' }).subscribe(
+          data => {
+            this.afs.doc('posts/' + this.docId + '/otherDetails/RelativePost1').set(data[0]);
+          }
+        );
+    }
+    if (this.relatepostForm.controls.RelativePost2.value) {
+      this.afs.
+        collection<Post>('posts', ref =>
+          ref.where('TITLE', '==', this.relatepostForm.controls.RelativePost2.value).limit(1))
+        .valueChanges({ idField: 'id' }).subscribe(
+          data => {
+            this.afs.doc('posts/' + this.docId + '/otherDetails/RelativePost2').set(data[0]);
+          }
+        );
+    }
+    if (this.relatepostForm.controls.RelativePost3.value) {
+      this.afs.
+        collection<Post>('posts', ref =>
+          ref.where('TITLE', '==', this.relatepostForm.controls.RelativePost3.value).limit(1))
+        .valueChanges({ idField: 'id' }).subscribe(
+          data => {
+            this.afs.doc('posts/' + this.docId + '/otherDetails/RelativePost3').set(data[0]);
+          }
+        );
+    }
   }
 
   createFormGroup(formBuilder: FormBuilder) {
@@ -65,7 +111,7 @@ export class AdminComponent implements OnInit {
       CATEGORY: new FormControl('', Validators.required),
       SUBCATEGORY: new FormControl('', Validators.required),
       TITLE: new FormControl('', Validators.required),
-      // 'IMAGEPATH': new FormControl(this.post.IMAGEPATH, Validators.required),
+      IMAGEPATH: new FormControl('', Validators.required),
       ISAUTHORRECOMMENDED: new FormControl('', Validators.required),
       ISPUBLISHED: new FormControl('', Validators.required),
       ACTIVATIONSTATUS: new FormControl('', Validators.required),
@@ -148,101 +194,72 @@ export class AdminComponent implements OnInit {
     this.post = this.contactForm.value;
     console.log(this.post);
 
-    if (this.isImageLoaded) {
-      this.filePath = `posts/${new Date().getTime()}_${this.file.name}`;
-      const fileref = this.storage.ref(this.filePath);
-      const task = this.storage.upload(this.filePath, this.file);
-      task.then((f) => {
-        return f.ref.getDownloadURL().then((url) => {
-          console.log(url);
-          // this.afs.collection('posts').add
-          // this.afs.collection(this.category).doc(this.title)
-          if (!this.editMode) {
-            this.afs.collection('posts').add(
-              {
-                TITLE: this.post.TITLE,
-                // CONTENT: this.content,
-                IMAGEPATH: url,
-                CREATEDDATE: new Date(),
-                CATEGORY: this.post.CATEGORY,
-                SUBCATEGORY: this.post.SUBCATEGORY,
-                ISAUTHORRECOMMENDED: this.post.ISAUTHORRECOMMENDED,
-                ACTIVATIONSTATUS: this.post.ACTIVATIONSTATUS,
-                ISPUBLISHED: this.post.ISPUBLISHED
-              }
-            ).then(
-              data => {
-                this.docId = data.id;
-                console.log(data);
-              }
-            ).then(
-              data => {
-                console.log('rntering contentEditable ');
-                console.log(this.docId);
+    // if (this.isImageLoaded) {
+    // this.filePath = `posts/${new Date().getTime()}_${this.file.name}`;
+    // const fileref = this.storage.ref(this.filePath);
+    // const task = this.storage.upload(this.filePath, this.file);
+    // task.then((f) => {
+    //   return f.ref.getDownloadURL().then((url) => {
+    // console.log(url);
+    // this.afs.collection('posts').add
+    // this.afs.collection(this.category).doc(this.title)
+    if (!this.editMode) {
+      this.afs.collection('posts').add(
+        {
+          TITLE: this.post.TITLE,
+          IMAGEPATH: this.post.IMAGEPATH,
+          CREATEDDATE: new Date(),
+          CATEGORY: this.post.CATEGORY,
+          SUBCATEGORY: this.post.SUBCATEGORY,
+          ISAUTHORRECOMMENDED: this.post.ISAUTHORRECOMMENDED,
+          ACTIVATIONSTATUS: this.post.ACTIVATIONSTATUS,
+          ISPUBLISHED: this.post.ISPUBLISHED
+        }
+      ).then(
+        data => {
+          this.docId = data.id;
+          console.log(data);
+        }
+      ).then(
+        data => {
+          console.log('rntering contentEditable ');
+          console.log(this.docId);
+          this.afs.doc('posts/' + this.docId + '/otherDetails/content').set(
+            {
+              CONTENT: this.post.CONTENT
+            }
+          );
+        }
+      );
+    } else {
+
+      console.log('entering update');
+      if (true) {
+        this.docRef.update
+          (
+            {
+              TITLE: this.post.TITLE,
+              IMAGEPATH: this.post.IMAGEPATH,
+              CREATEDDATE: new Date(),
+              CATEGORY: this.post.CATEGORY,
+              SUBCATEGORY: this.post.SUBCATEGORY,
+              ISAUTHORRECOMMENDED: this.post.ISAUTHORRECOMMENDED,
+              ACTIVATIONSTATUS: this.post.ACTIVATIONSTATUS,
+              ISPUBLISHED: this.post.ISPUBLISHED
+            }).then((res) => {
+              if (this.isContentEdiatable) {
                 this.afs.doc('posts/' + this.docId + '/otherDetails/content').set(
                   {
-                    CONTENT: this.contactForm.controls['CONTENT'].value
+                    CONTENT: this.post.CONTENT
                   }
                 );
               }
+            }
             );
-          } else {
+      }
+      // }
 
-            console.log('entering update');
-            const obj = {
-              ... { IMAGEPATH: url }
-            };
-            if (true) {
-              this.docRef.update
-                (
-                  {
-                    TITLE: this.post.TITLE,
-                    // CONTENT: this.content,
-                    // obj,
-                    // If(url){
-                    IMAGEPATH: url,
-                    // },
-                    CREATEDDATE: new Date(),
-                    CATEGORY: this.post.CATEGORY,
-                    SUBCATEGORY: this.post.SUBCATEGORY,
-                    ISAUTHORRECOMMENDED: this.post.ISAUTHORRECOMMENDED,
-                    ACTIVATIONSTATUS: this.post.ACTIVATIONSTATUS,
-                    ISPUBLISHED: this.post.ISPUBLISHED
-                  }).then((res) => {
-                    if (this.isContentEdiatable) {
-                      this.afs.doc('posts/' + this.docId + '/otherDetails/content').set(
-                        {
-                          CONTENT: this.post.CONTENT
-                        }
-                      );
-                    }
-                  }
-                  );
-            }
-          }
-        });
-      });
-    } else {
-      this.docRef.update
-        (
-          {
-            TITLE: this.post.TITLE,
-            CREATEDDATE: new Date(),
-            CATEGORY: this.post.CATEGORY,
-            SUBCATEGORY: this.post.SUBCATEGORY,
-            ISAUTHORRECOMMENDED: this.post.ISAUTHORRECOMMENDED,
-            ACTIVATIONSTATUS: this.post.ACTIVATIONSTATUS,
-            ISPUBLISHED: this.post.ISPUBLISHED
-          }).then((res) => {
-            if (this.isContentEdiatable) {
-              this.afs.doc('posts/' + this.docId + '/otherDetails/content').set(
-                {
-                  CONTENT: this.post.CONTENT
-                }
-              );
-            }
-          }
-          );
+
     }
     if (this.isNewCategory) {
       // this.categoryList.push(this.contactForm.get('CATEGORY').value);

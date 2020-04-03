@@ -8,10 +8,10 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
+import { AngularFirePerformanceModule,AngularFirePerformance } from '@angular/fire/performance';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AngularFireAnalyticsModule, ScreenTrackingService } from '@angular/fire/analytics';
-import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { DatePipe } from '@angular/common';
 
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -37,7 +37,6 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { ManagePostsComponent } from './manage-posts/manage-posts.component';
 import { authComponent } from './auth/authComponent';
 import { AdminComponent } from './admin/admin.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -48,7 +47,6 @@ import { CovidConsoleComponent } from './covid-console/covid-console.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent,
     PostComponent,
     AdminComponent,
     HomeComponent,
@@ -82,16 +80,16 @@ import { CovidConsoleComponent } from './covid-console/covid-console.component';
     MatTableModule,
     ChartsModule,
     MatNativeDateModule,
-    RichTextEditorAllModule,
     CKEditorModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireStorageModule,
         AngularFirestoreModule,
         AngularFireAnalyticsModule,
+        AngularFirePerformanceModule,
         MatDatepickerModule
   ],
-  providers: [AngularFirestore,ScreenTrackingService, DatePipe,
+  providers: [AngularFirestore, ScreenTrackingService, DatePipe, AngularFirePerformance,
     { provide: StorageBucket, useValue: 'gs://apparelmasons-38c8b.appspot.com' },
     {provide : HTTP_INTERCEPTORS , useClass : AuthInterceptorservice , multi: true }],
   bootstrap: [AppComponent]

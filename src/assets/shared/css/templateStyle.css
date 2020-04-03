@@ -871,12 +871,14 @@ RESPONSIVE
 	FOOTER
 ===========================================================*/
  #footer {
-     padding-bottom: 20px;
-     margin-top: 20px;
+     /* padding-bottom: 20px;
+     margin-top: 20px; */
+    position: absolute;
+    width: 100%;
 }
  #footer .container {
      padding-top: 30px;
-     border-top: 1px solid #F4f4f9;
+     /* border-top: 1px solid #F4f4f9; */
 }
  .footer-widget {
      margin-bottom: 5px;

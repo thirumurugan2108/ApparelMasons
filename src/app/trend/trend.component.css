@@ -15,13 +15,11 @@
     margin: auto;
     height: 80%;
     } */
-.recense {
-
-    padding:6px!important;
+.relativeContainer {
+    padding:6px;
   }
 
 .deadbar {
-
     margin-top:-125px!important;
   }
 }

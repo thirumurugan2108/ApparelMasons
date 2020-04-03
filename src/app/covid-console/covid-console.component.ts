@@ -19,7 +19,7 @@ export class CovidConsoleComponent {
   tableForm: FormGroup;
   test: CoronaRecords;
   testDate: Date;
-  relatepostForm: any;
+  relatepostForm: FormGroup;
 
   post1Array: any[];
   categoryList: string[] = [

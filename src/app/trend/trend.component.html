@@ -1,6 +1,6 @@
 
 <!-- <a style="color:green;">View By country</a> -->
-<p>{{date| date:'dd/MM/yyyy HH:mm:ss'}}</p>
+
 <div class="coronocount">
 	<div class="cases">
 		<h2 class="time">India coronavirus cases:</h2>
@@ -129,8 +129,8 @@
 </div>
 
 <!-- Symbol Column -->
-<section class="recense" style="padding:57px; margin-bottom:55px;">
-	
+<section class="relativeContainer">
+	<div class="row">
 		<h3>Related post</h3>
 		<div class="col-md-4 col-xs-12" [routerLink]="['/post',relapost.TITLE]" style="margin-bottom:20px;">
 			<div class="col-md-5 col-xs-5">
@@ -150,7 +150,7 @@
 			</div>
 
 		</div>
-		<div class="col-md-4 col-xs-12" [routerLink]="['/post',relapost2.TITLE]">
+		<div class="col-md-4 col-xs-12" [routerLink]="['/post',relapost2.TITLE]" style="margin-bottom:20px;">
 			<div class="col-md-5 col-xs-5">
 				<img [src]="relapost2.IMAGEPATH" class="relat" style="width:100%;" />
 			</div>
@@ -158,19 +158,16 @@
 				<h4>{{relapost2.TITLE}}</h4>
 			</div>
 		</div>
+		<div class="col-md-12 col-xs-12">
+			<h4>Source:</h4>
+			<div>
+				<a href="https://www.covid19india.org/">www.covid19india.org</a>
+			</div>
+			<div>
+				<a href="https://www.worldometers.info/coronavirus/">www.worldometers.info</a>
+			</div>
 	
-</section>
-
-
-<section class="container">
-	<div class="col-md-12">
-		<h4>Source:</h4>
-		<div>
-			<a href="https://www.covid19india.org/">www.covid19india.org</a>
 		</div>
-		<div>
-			<a href="https://www.worldometers.info/coronavirus/">www.worldometers.info</a>
-		</div>
-
 	</div>
 </section>
+

@@ -11,7 +11,12 @@
   border-radius: 50%;
 }
 
-
+.record {
+  width: 14px;
+  height: 14px;
+  background-color: red;
+  border-radius: 50%;
+}
 .live{
   -webkit-animation: blinking 1s cubic-bezier(.5,0,1,1) infinite alternate;
   animation: blinking 1s cubic-bezier(.5,0,1,1) infinite alternate;
@@ -21,12 +26,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   }
-.record {
-  width: 14px;
-  height: 14px;
-  background-color: red;
-  border-radius: 50%;
-}
+
 
 @media (max-width: 768px) {
   .imageflex {

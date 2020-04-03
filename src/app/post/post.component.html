@@ -1,15 +1,62 @@
+<section class="container" id="firstview">
+  <div class="post-container" [innerHTML]="blog?.CONTENT | sanitizeHtml"></div>
+</section>
 
+<!-- Symbol Column -->
+<section class="relativeContainer">
 
-<!-- <div class="post-container" [innerHTML]="blog"></div>
+  <h3>Related post</h3>
+  <div class="row">
+    <div class="col-md-4 col-xs-12" [routerLink]="['/post',relapost?.TITLE]" style="margin-bottom:20px;">
+      <div class="col-md-5 col-xs-5">
+        <img [src]="relapost?.IMAGEPATH" class="relat" style="width:100%;" />
+      </div>
+      <div class="col-md-7 col-xs-7" [routerLink]="['/post',relapost?.TITLE]">
+        <h4>{{relapost?.TITLE}}</h4>
+      </div>
 
-<div>
-     -->
-  <section class="container">
-    <div class="post-container" [innerHTML]="blog | sanitizeHtml"></div>
-  </section>
+    </div>
+    <div class="col-md-4 col-xs-12" [routerLink]="['/post',relapost1?.TITLE]" style="margin-bottom:20px;">
+      <div class="col-md-5 col-xs-5">
+        <img [src]="relapost1?.IMAGEPATH" class="relat" style="width:100%;" />
+      </div>
+      <div class="col-md-7 col-xs-7">
+        <h4>{{relapost1?.TITLE}}</h4>
+      </div>
 
-    
+    </div>
+    <div class="col-md-4 col-xs-12" [routerLink]="['/post',relapost2?.TITLE]" style="margin-bottom:20px;">
+      <div class="col-md-5 col-xs-5">
+        <img [src]="relapost2?.IMAGEPATH" class="relat" style="width:100%;" />
+      </div>
+      <div class="col-md-7 col-xs-7">
+        <h4>{{relapost2?.TITLE}}</h4>
+      </div>
+    </div>
+  </div>
 
-<!-- <div class="post-container" [innerHTML]="(blog | async)?.CONTENT | sanitizeHtml"></div> -->
+</section>
 
-<!-- .kdfbv;dfbvdkj -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div [routerLink]="['/COVID19']" style="margin: auto;" class="">
+        <div class="col-md-12">
+          <div class=" text-center text-link">
+            <div class="trend-heading">
+              COVID-19 Coronavirus - Update
+              <span class="ledContainer">
+                <a class="record blink_me" style="background-color:red; width:50%; height:50%;"></a>
+              </span>
+            </div>
+            <p class="" style="text-align:center;">{{date | date:'dd-MM-yyyy'}}</p>
+          </div>
+        </div>
+        <div class="col-md-12 card-hover textAlignCenter">
+          <img src="../../assets/shared/img/COVID_UPDATE.jpg" class="imgResponsive" alt="covid"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
