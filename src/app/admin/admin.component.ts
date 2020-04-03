@@ -24,7 +24,7 @@ interface CategoryList {
 export class AdminComponent implements OnInit {
 
   imageSrc: string;
-  // loaded: boolean;
+  
   filePath: string;
   file: any;
   isNewCategory = false;
